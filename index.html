@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>부모님의 삶, 자서전으로 기록하기</title>
+    <title>Parental Memory Excavation Engine</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&display=swap">
 </head>
@@ -11,8 +11,8 @@
     <main class="app-container">
         <header>
             <div class="header-content">
-                <span class="header-subtitle">당신의 기억을 문장으로</span>
-                <h1>Life Story</h1>
+                <span class="header-subtitle">Parental Memory Excavation Engine</span>
+                <h1>기억의 발굴</h1>
             </div>
             <div class="header-actions">
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
@@ -23,86 +23,68 @@
         </header>
 
         <nav class="main-nav">
-            <button class="nav-btn active" data-target="story-section">자서전 생성</button>
-            <button class="nav-btn" data-target="inquiry-section">출판 제휴문의</button>
-            <button class="nav-btn" data-target="community-section">이야기 나누기</button>
+            <button class="nav-btn active" data-target="excavate-section">질문 생성</button>
+            <button class="nav-btn" data-target="inquiry-section">제휴 문의</button>
+            <button class="nav-btn" data-target="community-section">커뮤니티</button>
         </nav>
         
-        <!-- Autobiography Generator Section -->
-        <section id="story-section" class="tab-content active">
+        <!-- Excavation Engine Section -->
+        <section id="excavate-section" class="tab-content active">
             <div class="input-card">
-                <div class="form-group">
-                    <label>부모님 성함</label>
-                    <input type="text" id="parent-name" placeholder="예: 김철수" class="input-field">
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label>출생 연도</label>
+                        <input type="number" id="birth-year" placeholder="1960" class="input-field">
+                    </div>
+                    <div class="form-group flex-2">
+                        <label>어린 시절 보낸 지역</label>
+                        <input type="text" id="location" placeholder="강원도 삼척, 서울 중구 등" class="input-field">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>출생 연도</label>
-                    <input type="number" id="birth-year" placeholder="예: 1955" class="input-field">
+                    <label>주요 직업 (가장 오래 종사한 일)</label>
+                    <input type="text" id="occupation" placeholder="초등학교 교사, 건설 현장 소장 등" class="input-field">
                 </div>
                 <div class="form-group">
-                    <label>주요 키워드 (3가지)</label>
-                    <input type="text" id="keywords" placeholder="예: 농사, 상경, 첫사랑 (쉼표로 구분)" class="input-field">
+                    <label>성격 키워드 (3가지)</label>
+                    <input type="text" id="traits" placeholder="무뚝뚝함, 성실함, 호기심 등" class="input-field">
                 </div>
                 <div class="form-group">
-                    <label>원하는 문체</label>
-                    <select id="tone-select" class="input-field">
-                        <option value="touching">감동적이고 따뜻하게</option>
-                        <option value="factual">사실적이고 담백하게</option>
-                        <option value="heroic">역경을 극복한 영웅 서사처럼</option>
-                    </select>
+                    <label>자녀(본인)와의 관계</label>
+                    <input type="text" id="relationship" placeholder="엄격한 아버지, 친구 같은 어머니 등" class="input-field">
                 </div>
-                <button id="generate-story-btn" class="primary-btn">이야기 생성하기</button>
+                <button id="generate-questions-btn" class="primary-btn">5가지 발굴 질문 생성하기</button>
             </div>
 
-            <div id="story-result" class="story-result hidden">
-                <h3>생성된 초안</h3>
-                <div id="story-text" class="story-content"></div>
+            <div id="result-container" class="story-result hidden">
+                <h3 id="result-title">Questions to uncover the unknown youth of your parent</h3>
+                <div id="questions-list" class="story-content"></div>
                 <div class="action-buttons">
                     <button id="copy-btn" class="secondary-btn">복사하기</button>
-                    <button id="retry-btn" class="secondary-btn">다시 쓰기</button>
+                    <button id="retry-btn" class="secondary-btn">다시 하기</button>
                 </div>
             </div>
         </section>
 
-        <!-- Inquiry Form Section -->
+        <!-- Other sections remain but updated for context -->
         <section id="inquiry-section" class="tab-content">
             <div class="section-header">
-                <h2 class="section-title">출판 및 제휴 문의</h2>
-                <p class="section-desc">소중한 이야기를 책으로 엮어드립니다.</p>
+                <h2 class="section-title">비즈니스 제휴</h2>
+                <p class="section-desc">기억 발굴 엔진을 활용한 프로젝트 문의</p>
             </div>
             <form action="https://formspree.io/f/xojnlegw" method="POST" class="contact-form">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="성함 또는 출판사명" required class="input-field">
-                </div>
-                <div class="form-group">
-                    <input type="email" name="_replyto" placeholder="이메일 주소" required class="input-field">
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="문의하실 내용을 상세히 적어주세요." required class="input-field textarea-field"></textarea>
-                </div>
-                <button type="submit" class="primary-btn">문의 내용 전송하기</button>
+                <input type="text" name="name" placeholder="성함" required class="input-field">
+                <input type="email" name="_replyto" placeholder="이메일" required class="input-field">
+                <textarea name="message" placeholder="문의 내용" required class="input-field textarea-field"></textarea>
+                <button type="submit" class="primary-btn">문의하기</button>
             </form>
         </section>
 
-        <!-- Comments Section -->
         <section id="community-section" class="tab-content">
-            <div class="section-header">
-                <h2 class="section-title">기억 공유하기</h2>
-                <p class="section-desc">인터뷰 팁이나 감동적인 사연을 나눠보세요.</p>
-            </div>
             <div id="disqus_thread"></div>
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         </section>
     </main>
 
     <script src="main.js"></script>
-    <script>
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://test-4xeppsbpce.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
 </body>
 </html>
