@@ -1,35 +1,34 @@
-# Parent's Legacy (자서전 생성기)
+# Life Story: The Digital Heritage Platform
 
 ## Overview
 
-A heartwarming web application designed to help users generate a draft of their parents' autobiography based on limited inputs. It features a warm, nostalgic interface suitable for storytelling.
+A premium digital heritage platform designed to excavate and record parental memories. It combines a powerful "Memory Excavation Engine" tool with high-quality editorial content to guide users in preserving their family history.
 
 ## Project Outline
 
-*   **`index.html`**: Structured with semantic HTML5. Features a tabbed interface for "자서전 생성" (Generate), "제휴문의" (Inquiry), and "커뮤니티" (Community).
-*   **`style.css`**: Implements a "Writer's Room" aesthetic. Uses Serif fonts, warm beige/paper tones, and comfortable spacing to evoke a sense of memory and respect.
-*   **`main.js`**: Handles the logic for collecting user inputs (Name, Era, Keywords) and simulating the generation of an autobiography draft using a template engine.
+*   **`index.html`**: A multi-section landing page featuring the core tool, editorial guides, and legal footers. Optimized for SEO and AdSense.
+*   **`style.css`**: "Magazine-style" aesthetic. Uses Noto Serif KR, clean spacing, and a focus on readability to support high-quality text content.
+*   **`main.js`**: Handles the 3-step excavation process (Input -> Questions -> Biography) and dynamic UI interactions.
+*   **`privacy.html` & `terms.html`**: Mandatory legal pages for trust and compliance.
 
 ## Implementation Details
 
 ### Visual Design
-- **Typography**: Uses 'Noto Serif KR' for a literary feel.
-- **Color Palette**: 
-    - **Background**: Warm Paper (`#fdfbf7`), Soft Gray (`#f4f4f5` for dark mode).
-    - **Text**: Ink Black (`#2d2d2d`), Charcoal (`#4b5563`).
-    - **Accent**: Muted Gold/Brown (`#92400e`) for elegance.
-- **Themes**:
-    - **Light Mode**: Classic paper look.
-    - **Dark Mode**: "Night Writing" mode (Deep warm gray background).
+- **Concept**: "Digital Library of Life".
+- **Typography**: Noto Serif KR for body text (readability), clean sans-serif for UI elements.
+- **Color Palette**: Warm Paper (`#fdfbf7`), Ink Black (`#2d2d2d`), Heritage Gold/Brown (`#92400e`).
 
 ### Features
-- **Autobiography Generator**:
-    - Inputs: Parent's Name, Birth Year, 3 Key Life Events/Keywords, Tone Preference.
-    - Output: A beautifully formatted generated story draft.
-- **Inquiry Form**: For publishing or printing partnerships.
-- **Community**: Users sharing stories or tips on interviewing parents.
+1.  **Memory Excavation Engine**:
+    - Step 1: User inputs parent's details.
+    - Step 2: System generates 3 deep, sensory-based interview questions.
+    - Step 3: User inputs answers -> System compiles a touching biography draft.
+2.  **Editorial Content**: High-value articles on "Why Record Memories" and "Interview Techniques" to satisfy AdSense content requirements.
+3.  **Trust & Compliance**: Dedicated Privacy Policy and Terms of Service pages.
+4.  **Monetization**: Optimized Google AdSense placement (Top/Bottom).
 
 ## Development History
 
-1.  **Pivot from Lotto App**: Completely replaced the number generator with a text generation interface.
-2.  **Rebranding**: Changed UI/UX from "Tech/Neon" to "Warm/Nostalgic".
+1.  **Pivot to "Life Story"**: Rebranded from a simple tool to a content-rich platform.
+2.  **AdSense Optimization**: Added editorial sections and legal pages to meet "High Quality Site" standards.
+3.  **Process Refinement**: Implemented the 3-step interactive biography generation flow.
