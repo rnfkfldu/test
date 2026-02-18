@@ -30,14 +30,18 @@ A sophisticated, high-performance web application for generating Lotto 6/45 numb
 - **Sorted Numbers**: Automatically sorts numbers in ascending order for standard lotto display.
 - **Dark Mode Persistence**: Remembers user's theme preference across sessions using `localStorage`.
 - **System Theme Integration**: Respects system-level dark/light mode preferences on first load.
+- **Business Inquiry Form**: Integrated Formspree endpoint for professional partnership inquiries.
 - **Responsive Layout**: Adapts gracefully from mobile to desktop.
 
 ## Development History
 
 1.  **Initial Version**: Simple single-set generator with basic styling.
-2.  **Sophistication Update (Current)**:
+2.  **Sophistication Update**:
     - Redesigned UI with modern CSS variables.
     - Added dark mode support with toggle and persistence.
     - Expanded generation to 5 sets with A-E labeling.
     - Implemented color coding for number ranges.
     - Added staggered entry animations for sets.
+3.  **Inquiry Feature**:
+    - Added a "Business Inquiry" section integrated with Formspree.
+    - Designed seamless form inputs matching the premium theme.
