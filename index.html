@@ -3,174 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="부모님의 사진, 음성, 기억을 기록하여 완성하는 프리미엄 디지털 자서전 플랫폼입니다.">
-    <title>Life Story - 멀티미디어 디지털 자서전</title>
+    <title>Life Story — Premium Digital Heritage</title>
     <meta name="google-adsense-account" content="ca-pub-2191211972164641">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2191211972164641" crossorigin="anonymous"></script>
 </head>
 <body>
     <main class="app-container">
-        <div class="ads-container top-ads">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2191211972164641" data-ad-slot="YOUR_AD_SLOT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
 
         <header>
-            <div class="header-content">
-                <span class="header-subtitle">Multimedia Memory Excavation</span>
-                <h1>Life Story</h1>
-                <p class="header-desc">사진과 목소리, 그리고 기록으로 완성하는 부모님의 유산.</p>
-            </div>
-            <div class="header-actions">
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                </button>
-            </div>
+            <span class="header-tag">DIGITAL HERITAGE</span>
+            <h1>Life Story</h1>
         </header>
 
         <nav class="main-nav">
-            <button class="nav-btn active" data-target="excavate-section">자서전 쓰기</button>
-            <button class="nav-btn" data-target="guide-section">인터뷰 가이드</button>
-            <button class="nav-btn" data-target="inquiry-section">제휴 문의</button>
+            <button class="nav-btn active" data-target="writer-section">자서전 쓰기</button>
             <button class="nav-btn" data-target="community-section">커뮤니티</button>
+            <button class="nav-btn" data-target="contact-section">문의하기</button>
         </nav>
-        
-        <section id="excavate-section" class="tab-content active">
-            <!-- Step 1: Input Info & Media -->
+
+        <!-- Writer Section (3-Step) -->
+        <section id="writer-section" class="tab-content active">
+            <!-- Step 1: Info & Media -->
             <div id="step-1" class="step-container">
-                <div class="input-card">
-                    <div class="form-row">
-                        <div class="form-group flex-1">
-                            <label>부모님 성함</label>
-                            <input type="text" id="parent-name" placeholder="김철수" class="input-field">
-                        </div>
-                        <div class="form-group flex-1">
-                            <label>출생 연도</label>
-                            <input type="number" id="birth-year" placeholder="1960" class="input-field">
-                        </div>
+                <div class="form-row media-grid">
+                    <div class="file-box" onclick="document.getElementById('photo-input').click()">
+                        <input type="file" id="photo-input" accept="image/*" class="hidden">
+                        <i>📷</i>
+                        <p id="photo-name">사진 첨부</p>
                     </div>
-                    
-                    <!-- Multimedia Uploads -->
-                    <div class="form-row media-inputs">
-                        <div class="form-group flex-1">
-                            <label>부모님 사진 (프로필)</label>
-                            <div class="file-input-wrapper">
-                                <input type="file" id="parent-photo" accept="image/*" class="file-input">
-                                <span class="file-custom">사진 선택</span>
-                            </div>
-                        </div>
-                        <div class="form-group flex-1">
-                            <label>부모님 음성 (기억 녹음)</label>
-                            <div class="file-input-wrapper">
-                                <input type="file" id="parent-voice" accept="audio/*" class="file-input">
-                                <span class="file-custom">음성 선택</span>
-                            </div>
-                        </div>
+                    <div class="file-box" onclick="document.getElementById('voice-input').click()">
+                        <input type="file" id="voice-input" accept="audio/*" class="hidden">
+                        <i>🎙️</i>
+                        <p id="voice-name">음성 첨부</p>
                     </div>
-
-                    <div class="form-group">
-                        <label>어린 시절 지역</label>
-                        <input type="text" id="location" placeholder="강원도 삼척 등" class="input-field">
-                    </div>
-                    <div class="form-group">
-                        <label>주요 직업</label>
-                        <input type="text" id="occupation" placeholder="초등학교 교사 등" class="input-field">
-                    </div>
-                    <div class="form-group">
-                        <label>성격 (3가지 키워드)</label>
-                        <input type="text" id="traits" placeholder="성실함, 무뚝뚝함, 따뜻함 등" class="input-field">
-                    </div>
-                    <div class="form-group">
-                        <label>자녀와의 관계</label>
-                        <input type="text" id="relationship" placeholder="엄격한 아버지 등" class="input-field">
-                    </div>
-                    <button id="generate-questions-btn" class="primary-btn">다음: 발굴 질문 생성</button>
                 </div>
+
+                <div class="form-group">
+                    <label>부모님 정보</label>
+                    <div class="form-row" style="display: flex; gap: 1rem;">
+                        <input type="text" id="parent-name" placeholder="성함" class="input-field" style="flex: 1;">
+                        <input type="number" id="birth-year" placeholder="출생연도" class="input-field" style="flex: 1;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>어린 시절 보낸 지역</label>
+                    <input type="text" id="location" placeholder="강원도 삼척, 서울 중구 등" class="input-field">
+                </div>
+
+                <div class="form-group">
+                    <label>평생의 업 (직업)</label>
+                    <input type="text" id="occupation" placeholder="초등학교 교사, 목수 등" class="input-field">
+                </div>
+
+                <div class="form-group">
+                    <label>성격 키워드</label>
+                    <input type="text" id="traits" placeholder="무뚝뚝함, 성실함, 따뜻함 등" class="input-field">
+                </div>
+
+                <button id="to-step-2-btn" class="primary-btn">다음 단계로</button>
             </div>
 
-            <!-- Step 2: Answer Questions -->
+            <!-- Step 2: Questions -->
             <div id="step-2" class="step-container hidden">
-                <h3 class="step-title">발굴된 3가지 질문에 답해주세요</h3>
-                <div id="questions-for-answers" class="questions-feedback-list"></div>
-                <button id="generate-biography-btn" class="primary-btn">최종 자서전 생성하기</button>
+                <h3 style="margin-bottom: 2rem; text-align: center;">기억의 발굴</h3>
+                <div id="questions-area"></div>
+                <button id="to-step-3-btn" class="primary-btn">자서전 완성하기</button>
             </div>
 
-            <!-- Step 3: Result with Multimedia -->
+            <!-- Step 3: Result -->
             <div id="step-3" class="step-container hidden">
-                <div class="story-result premium-result">
-                    <div id="result-media-header" class="result-media-header">
-                        <!-- 사진과 음성 플레이어가 여기에 동적으로 들어갑니다 -->
-                    </div>
-                    <h3>완성된 디지털 자서전</h3>
-                    <div id="final-biography" class="story-content"></div>
-                    <div class="action-buttons">
-                        <button id="copy-btn" class="secondary-btn">텍스트 복사</button>
-                        <button id="restart-btn" class="secondary-btn">처음부터 다시</button>
+                <div class="premium-result">
+                    <div id="result-media" class="result-media"></div>
+                    <div id="biography-text" class="story-content"></div>
+                    <div class="action-buttons" style="display: flex; gap: 1rem; margin-top: 3rem;">
+                        <button id="copy-btn" class="primary-btn" style="flex: 1;">텍스트 복사</button>
+                        <button id="restart-btn" class="primary-btn" style="flex: 1; background-color: var(--text-muted);">다시 쓰기</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Guide Section -->
-        <section id="guide-section" class="tab-content">
-            <article class="content-article">
-                <h2>멀티미디어가 자서전에 미치는 힘</h2>
-                <p>텍스트는 사실을 전달하지만, <strong>목소리는 감정을 전달합니다.</strong> 부모님이 직접 들려주시는 옛날이야기 녹음 파일은 그 어떤 글보다 강력한 울림을 줍니다. 또한, 젊은 시절의 사진 한 장은 자녀들이 상상하지 못했던 부모님의 청춘을 생생하게 복원해냅니다.</p>
-                <h3>풍성한 기록을 위한 팁</h3>
-                <ul>
-                    <li><strong>사진:</strong> 가장 웃음이 많았던 순간이나, 직업 현장에서의 모습이 담긴 사진을 추천합니다.</li>
-                    <li><strong>음성:</strong> 스마트폰 녹음 기능을 활용해 "가장 행복했던 기억"을 1분 내외로 짧게 녹음하여 업로드해보세요.</li>
-                </ul>
-            </article>
-        </section>
-
-        <section id="inquiry-section" class="tab-content">
-            <div class="inquiry-card">
-                <div class="section-header">
-                    <h2 class="section-title">비즈니스 제휴 문의</h2>
-                    <p class="section-desc">멀티미디어 자서전 플랫폼 협업 문의를 환영합니다.</p>
-                </div>
-                <form action="https://formspree.io/f/xojnlegw" method="POST" class="contact-form">
-                    <div class="form-row">
-                        <div class="form-group flex-1">
-                            <label>담당자 성함</label>
-                            <input type="text" name="name" required class="input-field" placeholder="홍길동">
-                        </div>
-                        <div class="form-group flex-1">
-                            <label>이메일</label>
-                            <input type="email" name="_replyto" required class="input-field" placeholder="example@mail.com">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>문의 내용</label>
-                        <textarea name="message" required class="input-field textarea-field" placeholder="협력하고 싶은 내용을 상세히 적어주세요."></textarea>
-                    </div>
-                    <button type="submit" class="primary-btn">제휴 문의 전송하기</button>
-                </form>
-            </div>
-        </section>
-
+        <!-- Community Section -->
         <section id="community-section" class="tab-content">
             <div id="disqus_thread"></div>
         </section>
 
-        <div class="ads-container bottom-ads">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2191211972164641" data-ad-slot="YOUR_AD_SLOT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <!-- Contact Section -->
+        <section id="contact-section" class="tab-content">
+            <form action="https://formspree.io/f/xojnlegw" method="POST">
+                <div class="form-group">
+                    <label>성함/이메일</label>
+                    <input type="email" name="email" required class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>문의내용</label>
+                    <textarea name="message" class="input-field" style="min-height: 150px; resize: none;"></textarea>
+                </div>
+                <button type="submit" class="primary-btn">전송하기</button>
+            </form>
+        </section>
 
-        <footer class="main-footer">
-            <p>&copy; 2026 Life Story. All rights reserved.</p>
+        <footer>
             <div class="footer-links">
                 <a href="terms.html">이용약관</a>
                 <a href="privacy.html">개인정보처리방침</a>
             </div>
+            <p style="margin-top: 1.5rem;">&copy; 2026 Life Story. All rights reserved.</p>
         </footer>
     </main>
 
     <script src="main.js"></script>
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = 'lifestory-main';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://test-4xeppsbpce.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
 </body>
 </html>

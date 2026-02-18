@@ -5,16 +5,14 @@ const themeToggle = document.getElementById('theme-toggle');
 const sunIcon = document.getElementById('sun-icon');
 const moonIcon = document.getElementById('moon-icon');
 
-// Step Elements
+// Step Containers
 const step1 = document.getElementById('step-1');
 const step2 = document.getElementById('step-2');
 const step3 = document.getElementById('step-3');
 
-const generateQuestionsBtn = document.getElementById('generate-questions-btn');
-const generateBioBtn = document.getElementById('generate-biography-btn');
-const questionsFeedbackList = document.getElementById('questions-for-answers');
-const finalBioText = document.getElementById('final-biography');
-const resultMediaHeader = document.getElementById('result-media-header');
+// Buttons
+const toStep2Btn = document.getElementById('to-step-2-btn');
+const toStep3Btn = document.getElementById('to-step-3-btn');
 const restartBtn = document.getElementById('restart-btn');
 const copyBtn = document.getElementById('copy-btn');
 
@@ -33,7 +31,7 @@ navBtns.forEach(btn => {
     });
 });
 
-// --- Theme ---
+// --- Theme Management ---
 const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 document.documentElement.setAttribute('data-theme', savedTheme);
 updateThemeIcons(savedTheme);
@@ -51,102 +49,95 @@ themeToggle.addEventListener('click', () => {
     updateThemeIcons(newTheme);
 });
 
-// --- Logic ---
-let parentData = {};
+// --- Multimedia Handling ---
+let photoUrl = null;
+let voiceUrl = null;
 
-// Handle File Names Display
-document.querySelectorAll('.file-input').forEach(input => {
-    input.addEventListener('change', (e) => {
-        const fileName = e.target.files[0] ? e.target.files[0].name : "파일 선택";
-        e.target.nextElementSibling.textContent = fileName;
-    });
+document.getElementById('photo-input').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        photoUrl = URL.createObjectURL(file);
+        document.getElementById('photo-name').textContent = file.name;
+    }
 });
 
-generateQuestionsBtn.addEventListener('click', () => {
+document.getElementById('voice-input').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        voiceUrl = URL.createObjectURL(file);
+        document.getElementById('voice-name').textContent = file.name;
+    }
+});
+
+// --- Process Logic ---
+let parentData = {};
+
+toStep2Btn.addEventListener('click', () => {
     const name = document.getElementById('parent-name').value.trim();
     const year = document.getElementById('birth-year').value;
     const location = document.getElementById('location').value.trim();
     const occupation = document.getElementById('occupation').value.trim();
     const traits = document.getElementById('traits').value.trim();
-    const relationship = document.getElementById('relationship').value.trim();
-    
-    // Multimedia Files
-    const photoFile = document.getElementById('parent-photo').files[0];
-    const voiceFile = document.getElementById('parent-voice').files[0];
 
-    if (!name || !year || !location || !occupation || !traits || !relationship) {
+    if (!name || !year || !location || !occupation || !traits) {
         alert("모든 필수 정보를 입력해주세요.");
         return;
     }
 
-    parentData = { 
-        name, year, location, occupation, traits, relationship,
-        photoUrl: photoFile ? URL.createObjectURL(photoFile) : null,
-        voiceUrl: voiceFile ? URL.createObjectURL(voiceFile) : null
-    };
+    parentData = { name, year, location, occupation, traits };
 
-    const traitArray = traits.split(',').map(t => t.trim());
-    const primaryTrait = traitArray[0];
-
+    // Generate 3 Questions
+    const questionsArea = document.getElementById('questions-area');
     const questions = [
-        `${location}에서 보낸 어린 시절 중, 가장 선명하게 기억나는 소리나 냄새가 있는 '그날'의 장면을 설명해주실 수 있나요?`,
-        `${occupation}을(를) 평생의 업으로 삼으면서, 가장 보람찼거나 혹은 남몰래 힘들어서 포기하고 싶었던 구체적인 순간은 언제였나요?`,
-        `자녀에게 평소 '${relationship}'의 모습을 보여주셨지만, 사실 부모님 내면의 '${primaryTrait}'함을 유지하기 위해 스스로에게 가장 많이 했던 다짐은 무엇인가요?`
+        `${location}에서 보낸 어린 시절 중, 가장 선명하게 기억나는 '냄새'나 '풍경'의 장면을 설명해주세요.`,
+        `${occupation}이라는 업을 이어가면서, 가장 자부심을 느꼈거나 남몰래 견뎌야 했던 딱 한 순간은 언제인가요?`,
+        `주변 사람들은 당신을 '${traits}'한 분이라 하지만, 사실 내면의 중심을 지키기 위해 당신이 가장 많이 했던 다짐은 무엇인가요?`
     ];
 
-    questionsFeedbackList.innerHTML = questions.map((q, i) => `
-        <div class="answer-box">
-            <p>질문 ${i + 1}: ${q}</p>
-            <textarea class="input-field textarea-field answer-input" placeholder="여기에 답변을 적어주세요..."></textarea>
+    questionsArea.innerHTML = questions.map((q, i) => `
+        <div class="form-group" style="margin-bottom: 2rem;">
+            <label style="font-size: 1.1rem; color: var(--text); margin-bottom: 1rem;">질문 ${i + 1}: ${q}</label>
+            <textarea class="input-field answer-input" style="min-height: 120px; resize: none;" placeholder="답변을 입력해주세요..."></textarea>
         </div>
     `).join('');
 
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-generateBioBtn.addEventListener('click', () => {
-    const answers = Array.from(document.querySelectorAll('.answer-input')).map(input => input.value.trim());
+toStep3Btn.addEventListener('click', () => {
+    const answers = Array.from(document.querySelectorAll('.answer-input')).map(a => a.value.trim());
     if (answers.some(a => !a)) {
-        alert("모든 질문에 답변을 작성해주세요.");
+        alert("모든 질문에 답을 해주시면 더욱 풍성한 자서전이 됩니다.");
         return;
     }
 
-    generateBioBtn.textContent = "디지털 자서전을 구성하는 중...";
-    generateBioBtn.disabled = true;
+    const resultMedia = document.getElementById('result-media');
+    const biographyText = document.getElementById('biography-text');
 
-    setTimeout(() => {
-        // Render Media
-        resultMediaHeader.innerHTML = '';
-        if (parentData.photoUrl) {
-            const img = document.createElement('img');
-            img.src = parentData.photoUrl;
-            img.classList.add('profile-img-preview');
-            resultMediaHeader.appendChild(img);
-        }
-        if (parentData.voiceUrl) {
-            const playerDiv = document.createElement('div');
-            playerDiv.classList.add('audio-player-container');
-            const audioLabel = document.createElement('p');
-            audioLabel.textContent = "🔊 부모님의 목소리";
-            audioLabel.style.fontSize = "0.8rem";
-            audioLabel.style.marginBottom = "0.5rem";
-            audioLabel.style.textAlign = "center";
-            playerDiv.appendChild(audioLabel);
-            
-            const audio = document.createElement('audio');
-            audio.src = parentData.voiceUrl;
-            audio.controls = true;
-            playerDiv.appendChild(audio);
-            resultMediaHeader.appendChild(playerDiv);
-        }
+    // Display Media
+    resultMedia.innerHTML = '';
+    if (photoUrl) {
+        const img = document.createElement('img');
+        img.src = photoUrl;
+        img.classList.add('profile-img');
+        resultMedia.appendChild(img);
+    }
+    if (voiceUrl) {
+        const audio = document.createElement('audio');
+        audio.src = voiceUrl;
+        audio.controls = true;
+        audio.style.width = '240px';
+        resultMedia.appendChild(audio);
+    }
 
-        const bio = `
-[ ${parentData.name}의 생애: 디지털 기록 ]
+    // Compose Biography
+    const bio = `
+[ ${parentData.name}의 삶: 기억의 발굴 ]
 
-${parentData.year}년, ${parentData.location}의 따스한 햇살 아래서 한 아이가 태어났습니다. 
-이 아이는 훗날 누군가의 든든한 '${parentData.relationship}'이자, 세상을 '${parentData.traits}'하게 살아가는 어른이 되었습니다.
+${parentData.year}년, ${parentData.location}의 따스한 공기 속에서 한 아이가 태어났습니다. 
+이 아이는 훗날 세상을 '${parentData.traits}'하게 살아가는 어른이 되었습니다.
 
 부모님은 기억합니다. ${answers[0]}
 그 기억의 파편들이 모여 지금의 부드러운 미소가 되었습니다.
@@ -158,33 +149,31 @@ ${parentData.year}년, ${parentData.location}의 따스한 햇살 아래서 한 
 그 깊은 속내를 이제야 문장으로 마주하며, 우리는 비로소 부모님이라는 거대한 세계를 이해하기 시작합니다.
 
 이 기록은 단순히 한 개인의 역사가 아닌, 사랑과 헌신으로 써 내려간 우리 가족의 뿌리입니다.
-        `.trim();
+    `.trim();
 
-        finalBioText.textContent = bio;
-        step2.classList.add('hidden');
-        step3.classList.remove('hidden');
-        generateBioBtn.textContent = "최종 자서전 생성하기";
-        generateBioBtn.disabled = false;
-        window.scrollTo(0, 0);
-    }, 1500);
+    biographyText.textContent = bio;
+    step2.classList.add('hidden');
+    step3.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 restartBtn.addEventListener('click', () => {
-    // Revoke object URLs to free up memory
-    if (parentData.photoUrl) URL.revokeObjectURL(parentData.photoUrl);
-    if (parentData.voiceUrl) URL.revokeObjectURL(parentData.voiceUrl);
+    if (photoUrl) URL.revokeObjectURL(photoUrl);
+    if (voiceUrl) URL.revokeObjectURL(voiceUrl);
+    photoUrl = null; voiceUrl = null;
     
     step3.classList.add('hidden');
     step1.classList.remove('hidden');
-    document.querySelectorAll('input, textarea').forEach(el => el.value = '');
-    document.querySelectorAll('.file-custom').forEach(el => el.textContent = '파일 선택');
-    window.scrollTo(0, 0);
+    document.querySelectorAll('.input-field').forEach(el => el.value = '');
+    document.getElementById('photo-name').textContent = "사진 첨부";
+    document.getElementById('voice-name').textContent = "음성 첨부";
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(finalBioText.textContent).then(() => {
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = "복사 완료!";
-        setTimeout(() => copyBtn.textContent = originalText, 2000);
+    navigator.clipboard.writeText(document.getElementById('biography-text').textContent).then(() => {
+        const original = copyBtn.textContent;
+        copyBtn.textContent = "복사 완료";
+        setTimeout(() => copyBtn.textContent = original, 2000);
     });
 });
