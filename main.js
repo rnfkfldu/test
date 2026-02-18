@@ -3,6 +3,28 @@ const generateBtn = document.getElementById('generate-btn');
 const themeToggle = document.getElementById('theme-toggle');
 const sunIcon = document.getElementById('sun-icon');
 const moonIcon = document.getElementById('moon-icon');
+const navBtns = document.querySelectorAll('.nav-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+// Navigation Logic
+navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        
+        // Update buttons
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update content
+        tabContents.forEach(content => {
+            if (content.id === target) {
+                content.classList.add('active');
+            } else {
+                content.classList.remove('active');
+            }
+        });
+    });
+});
 
 // Theme Management
 const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -52,7 +74,7 @@ function createSetElement(index, numbers) {
     
     const label = document.createElement('span');
     label.classList.add('set-label');
-    label.textContent = String.fromCharCode(65 + index); // A, B, C, D, E
+    label.textContent = String.fromCharCode(65 + index);
     setDiv.appendChild(label);
     
     const ballsContainer = document.createElement('div');
@@ -75,14 +97,12 @@ function displaySets() {
         const numbers = generateLottoSet();
         const setElement = createSetElement(i, numbers);
         
-        // Add staggered animation delay
         setElement.style.opacity = '0';
         setElement.style.transform = 'translateY(10px)';
         setElement.style.transition = `all 0.3s ease-out ${i * 0.1}s`;
         
         setsContainer.appendChild(setElement);
         
-        // Trigger animation
         requestAnimationFrame(() => {
             setElement.style.opacity = '1';
             setElement.style.transform = 'translateY(0)';
@@ -90,10 +110,7 @@ function displaySets() {
     }
 }
 
-generateBtn.addEventListener('click', () => {
-    // Button ripple/feedback effect can be added here
-    displaySets();
-});
+generateBtn.addEventListener('click', displaySets);
 
 // Initial Load
 displaySets();
