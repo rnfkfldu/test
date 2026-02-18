@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Lotto Pro</title>
+    <title>부모님의 삶, 자서전으로 기록하기</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&display=swap">
 </head>
 <body>
     <main class="app-container">
         <header>
-            <h1>Lotto Pro</h1>
+            <div class="header-content">
+                <span class="header-subtitle">당신의 기억을 문장으로</span>
+                <h1>Life Story</h1>
+            </div>
             <div class="header-actions">
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
                     <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -20,39 +23,73 @@
         </header>
 
         <nav class="main-nav">
-            <button class="nav-btn active" data-target="lotto-section">번호생성</button>
-            <button class="nav-btn" data-target="contact-section">제휴문의</button>
-            <button class="nav-btn" data-target="comments-section">커뮤니티</button>
+            <button class="nav-btn active" data-target="story-section">자서전 생성</button>
+            <button class="nav-btn" data-target="inquiry-section">출판 제휴문의</button>
+            <button class="nav-btn" data-target="community-section">이야기 나누기</button>
         </nav>
         
-        <!-- Lotto Generator Section -->
-        <section id="lotto-section" class="tab-content active">
-            <div id="sets-container" class="sets-container">
-                <!-- Sets will be generated here -->
+        <!-- Autobiography Generator Section -->
+        <section id="story-section" class="tab-content active">
+            <div class="input-card">
+                <div class="form-group">
+                    <label>부모님 성함</label>
+                    <input type="text" id="parent-name" placeholder="예: 김철수" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>출생 연도</label>
+                    <input type="number" id="birth-year" placeholder="예: 1955" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>주요 키워드 (3가지)</label>
+                    <input type="text" id="keywords" placeholder="예: 농사, 상경, 첫사랑 (쉼표로 구분)" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>원하는 문체</label>
+                    <select id="tone-select" class="input-field">
+                        <option value="touching">감동적이고 따뜻하게</option>
+                        <option value="factual">사실적이고 담백하게</option>
+                        <option value="heroic">역경을 극복한 영웅 서사처럼</option>
+                    </select>
+                </div>
+                <button id="generate-story-btn" class="primary-btn">이야기 생성하기</button>
             </div>
-            <button id="generate-btn">오늘의 행운 번호 생성하기</button>
+
+            <div id="story-result" class="story-result hidden">
+                <h3>생성된 초안</h3>
+                <div id="story-text" class="story-content"></div>
+                <div class="action-buttons">
+                    <button id="copy-btn" class="secondary-btn">복사하기</button>
+                    <button id="retry-btn" class="secondary-btn">다시 쓰기</button>
+                </div>
+            </div>
         </section>
 
-        <!-- Contact Form Section -->
-        <section id="contact-section" class="tab-content">
-            <h2 class="section-title">비즈니스 제휴 문의</h2>
+        <!-- Inquiry Form Section -->
+        <section id="inquiry-section" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">출판 및 제휴 문의</h2>
+                <p class="section-desc">소중한 이야기를 책으로 엮어드립니다.</p>
+            </div>
             <form action="https://formspree.io/f/xojnlegw" method="POST" class="contact-form">
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="성함 또는 업체명" required>
+                    <input type="text" name="name" placeholder="성함 또는 출판사명" required class="input-field">
                 </div>
                 <div class="form-group">
-                    <input type="email" name="_replyto" placeholder="이메일 주소" required>
+                    <input type="email" name="_replyto" placeholder="이메일 주소" required class="input-field">
                 </div>
                 <div class="form-group">
-                    <textarea name="message" placeholder="문의 내용을 입력해주세요" required></textarea>
+                    <textarea name="message" placeholder="문의하실 내용을 상세히 적어주세요." required class="input-field textarea-field"></textarea>
                 </div>
-                <button type="submit" class="submit-btn">문의 내용 전송하기</button>
+                <button type="submit" class="primary-btn">문의 내용 전송하기</button>
             </form>
         </section>
 
         <!-- Comments Section -->
-        <section id="comments-section" class="tab-content">
-            <h2 class="section-title">사용자 피드백</h2>
+        <section id="community-section" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">기억 공유하기</h2>
+                <p class="section-desc">인터뷰 팁이나 감동적인 사연을 나눠보세요.</p>
+            </div>
             <div id="disqus_thread"></div>
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         </section>

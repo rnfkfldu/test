@@ -1,34 +1,35 @@
-# Premium Lotto Pro (v2)
+# Parent's Legacy (자서전 생성기)
 
 ## Overview
 
-A premium, single-page application (SPA) featuring a tabbed interface. Users can switch between a high-performance lotto generator, a professional business inquiry form, and a community discussion thread.
+A heartwarming web application designed to help users generate a draft of their parents' autobiography based on limited inputs. It features a warm, nostalgic interface suitable for storytelling.
 
 ## Project Outline
 
-*   **`index.html`**: Implements a tabbed navigation system and semantic content sections for each feature.
-*   **`style.css`**: Features a custom tab design, premium typography (Pretendard), and full dark mode support.
-*   **`main.js`**: Manages section visibility via a custom tab controller and handles the lotto generation logic.
+*   **`index.html`**: Structured with semantic HTML5. Features a tabbed interface for "자서전 생성" (Generate), "제휴문의" (Inquiry), and "커뮤니티" (Community).
+*   **`style.css`**: Implements a "Writer's Room" aesthetic. Uses Serif fonts, warm beige/paper tones, and comfortable spacing to evoke a sense of memory and respect.
+*   **`main.js`**: Handles the logic for collecting user inputs (Name, Era, Keywords) and simulating the generation of an autobiography draft using a template engine.
 
 ## Implementation Details
 
 ### Visual Design
-- **Tabbed Interface**: Clean, pill-shaped navigation for switching between "번호생성" (Generate), "제휴문의" (Inquiry), and "커뮤니티" (Community).
-- **Dark Mode**: Fully themed for both modes with preference persistence.
-- **Premium Aesthetics**: Staggered animations, color-coded lotto balls, and linear-gradient accents.
+- **Typography**: Uses 'Noto Serif KR' for a literary feel.
+- **Color Palette**: 
+    - **Background**: Warm Paper (`#fdfbf7`), Soft Gray (`#f4f4f5` for dark mode).
+    - **Text**: Ink Black (`#2d2d2d`), Charcoal (`#4b5563`).
+    - **Accent**: Muted Gold/Brown (`#92400e`) for elegance.
+- **Themes**:
+    - **Light Mode**: Classic paper look.
+    - **Dark Mode**: "Night Writing" mode (Deep warm gray background).
 
 ### Features
-- **Lotto Generator**: Focuses solely on generating 5 sets of unique, sorted numbers.
-- **Inquiry Form**: Separated section for business-related communications via Formspree.
-- **Community**: Integrated Disqus thread for user engagement in its own dedicated space.
-- **Responsive Layout**: Optimized for mobile and desktop viewing.
+- **Autobiography Generator**:
+    - Inputs: Parent's Name, Birth Year, 3 Key Life Events/Keywords, Tone Preference.
+    - Output: A beautifully formatted generated story draft.
+- **Inquiry Form**: For publishing or printing partnerships.
+- **Community**: Users sharing stories or tips on interviewing parents.
 
 ## Development History
 
-1.  **Initial Version**: Basic lottery number generator.
-2.  **Sophistication Update**: Added dark mode, 5-set generation, and modern styling.
-3.  **Expansion Update**: Integrated Formspree for inquiries and Disqus for comments.
-4.  **Refactor (Current)**:
-    - Implemented **Tabbed Navigation** to separate core functions.
-    - Simplified the "번호생성" view to focus exclusively on lotto numbers.
-    - Created dedicated spaces for "제휴문의" and "커뮤니티".
+1.  **Pivot from Lotto App**: Completely replaced the number generator with a text generation interface.
+2.  **Rebranding**: Changed UI/UX from "Tech/Neon" to "Warm/Nostalgic".
