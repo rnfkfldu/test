@@ -8,22 +8,20 @@ const moonIcon = document.getElementById('moon-icon');
 const generateBtn = document.getElementById('generate-questions-btn');
 const resultContainer = document.getElementById('result-container');
 const questionsList = document.getElementById('questions-list');
+const resultTitle = document.getElementById('result-title');
 const copyBtn = document.getElementById('copy-btn');
 const retryBtn = document.getElementById('retry-btn');
 
-// --- Navigation ---
+// --- Navigation & Theme (Existing logic) ---
 navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const target = btn.getAttribute('data-target');
         navBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        tabContents.forEach(content => {
-            content.classList.toggle('active', content.id === target);
-        });
+        tabContents.forEach(content => content.classList.toggle('active', content.id === target));
     });
 });
 
-// --- Theme ---
 const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 document.documentElement.setAttribute('data-theme', savedTheme);
 updateThemeIcons(savedTheme);
@@ -41,20 +39,21 @@ themeToggle.addEventListener('click', () => {
     updateThemeIcons(newTheme);
 });
 
-// --- Excavation Engine Core Logic ---
+// --- Parental Memory Excavation Engine (Refined) ---
 function generateExcavationQuestions(birthYear, location, occupation, traits, relationship) {
-    const era = birthYear < 1960 ? "흑백 사진 같던 시절" : (birthYear < 1980 ? "산업화의 소음이 가득하던 시절" : "격변하는 시대");
     const traitList = traits.split(',').map(t => t.trim());
-    const primaryTrait = traitList[0] || "침착함";
+    const primaryTrait = traitList[0] || "성실함";
+    
+    // Scene-based, sensory-focused, emotionally revealing questions
+    const questions = [
+        `1. ${location}에서 가장 크게 혼났거나 부끄러웠던 날, 숨어있던 장소의 냄새나 발끝에 닿았던 감촉이 기억나시나요?`,
+        `2. ${occupation}을 시작하고 처음으로 '나도 이제 어른이구나'라고 느꼈던 그날, 퇴근길에 보았던 풍경이나 당신이 입고 있던 옷은 무엇이었나요?`,
+        `3. 사람들은 당신을 '${primaryTrait}'한 분이라 하지만, 사실 마음속 깊이 가장 두려워했던 순간이나 그때 당신을 붙잡아준 작은 습관이 있었나요?`,
+        `4. ${relationship}라는 역할 뒤에 숨겨진, 오직 '청년'이었던 당신이 가장 빛나던 순간에 찍힌 사진 한 장이 있다면 그 안의 당신은 어떤 표정을 짓고 있나요?`,
+        `5. 인생의 큰 전환점이 되었던 그날, 결정을 내리고 난 직후 처음으로 먹었던 음식의 맛이나 그때 주변에서 들려오던 소리를 기억하시나요?`
+    ];
 
-    // Logic for generating scene-based questions
-    return [
-        `1. ${location}에서 가장 추웠던 겨울날, 어린 당신이 추위를 뚫고 달려가던 그 장소엔 무엇이 있었나요?`,
-        `2. ${occupation}을 하며 처음으로 '내 손으로 번 돈'을 쥐었을 때, 그 지폐의 감촉과 함께 떠오르는 첫 구매 품목은 무엇인가요?`,
-        `3. 스스로를 '${primaryTrait}'한 사람이라 정의하기까지, 남몰래 울음을 삼켰거나 혹은 큰 소리로 웃음을 터뜨렸던 딱 한 장면이 있다면요?`,
-        `4. ${relationship} 관계에서 벗어나 한 명의 청년으로서, 세상에 나가기 전 거울을 보며 매만졌던 당신의 모습은 어떠했나요?`,
-        `5. 인생이라는 긴 여정에서 ${location}을(를) 떠나기로 결심했던 그 새벽, 혹은 그 기차역에서 맡았던 공기의 냄새를 기억하시나요?`
-    ].join('\n\n');
+    return questions.join('\n\n');
 }
 
 generateBtn.addEventListener('click', () => {
@@ -69,7 +68,10 @@ generateBtn.addEventListener('click', () => {
         return;
     }
 
-    generateBtn.textContent = "기억의 파편을 모으는 중...";
+    // Exact Title Format
+    resultTitle.textContent = "[Title] Questions to uncover the unknown youth of your parent";
+    
+    generateBtn.textContent = "기억의 장면을 발굴하는 중...";
     generateBtn.disabled = true;
 
     setTimeout(() => {
@@ -78,14 +80,13 @@ generateBtn.addEventListener('click', () => {
         resultContainer.classList.remove('hidden');
         questionsList.textContent = '';
         
-        // Staggered typing effect for the list
         let i = 0;
         const interval = setInterval(() => {
             questionsList.textContent += questions[i];
             i++;
             if (i >= questions.length) {
                 clearInterval(interval);
-                generateBtn.textContent = "다시 발굴하기";
+                generateBtn.textContent = "새로운 질문 발굴하기";
                 generateBtn.disabled = false;
             }
         }, 15);
@@ -94,7 +95,8 @@ generateBtn.addEventListener('click', () => {
 
 // Utilities
 copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(questionsList.textContent).then(() => {
+    const textToCopy = `${resultTitle.textContent}\n\n${questionsList.textContent}`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
         const originalText = copyBtn.textContent;
         copyBtn.textContent = "복사 완료!";
         setTimeout(() => copyBtn.textContent = originalText, 2000);
