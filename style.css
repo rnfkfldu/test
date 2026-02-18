@@ -1,46 +1,215 @@
+:root {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-color: #1e293b;
+    --accent-color: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.5);
+    --secondary-bg: #f1f5f9;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 15px var(--accent-glow);
+    --border-color: #e2e8f0;
+    --transition-speed: 0.3s;
+
+    /* Lotto Ball Colors */
+    --ball-1: #facc15; /* 1-10 */
+    --ball-11: #60a5fa; /* 11-20 */
+    --ball-21: #f87171; /* 21-30 */
+    --ball-31: #94a3b8; /* 31-40 */
+    --ball-41: #4ade80; /* 41-45 */
+}
+
+[data-theme='dark'] {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-color: #f1f5f9;
+    --secondary-bg: #334155;
+    --border-color: #334155;
+    --accent-glow: rgba(59, 130, 246, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-    font-family: sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    padding: 2rem 1rem;
 }
 
-.container {
-    text-align: center;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.app-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
 }
 
-.numbers {
+.app-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+}
+
+header {
     display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
-.number {
-    width: 40px;
-    height: 40px;
+h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.theme-toggle {
+    background: var(--secondary-bg);
+    border: none;
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: var(--border-color);
+}
+
+.sets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.number-set {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    background-color: var(--secondary-bg);
+    border-radius: 16px;
+    transition: transform 0.2s;
+    border: 1px solid transparent;
+}
+
+.number-set:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-glow);
+    box-shadow: var(--shadow-md);
+}
+
+.set-label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    margin-right: 1rem;
+    min-width: 20px;
+}
+
+.balls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ball {
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background-color: #eee;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 0.5rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), inset 0 -2px 4px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.3);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.ball:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.ball.range-1 { background-color: var(--ball-1); color: #854d0e; }
+.ball.range-11 { background-color: var(--ball-11); }
+.ball.range-21 { background-color: var(--ball-21); }
+.ball.range-31 { background-color: var(--ball-31); }
+.ball.range-41 { background-color: var(--ball-41); }
+
 #generate-btn {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.125rem;
+    font-weight: 700;
     border: none;
-    background-color: #4CAF50;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
     color: white;
-    border-radius: 5px;
+    border-radius: 16px;
     cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px 0 var(--accent-glow);
+}
+
+#generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+#generate-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .app-container {
+        padding: 1.5rem;
+    }
+    
+    .number-set {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .set-label {
+        margin-right: 0;
+        margin-bottom: 0.25rem;
+    }
+
+    .ball {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
 }
