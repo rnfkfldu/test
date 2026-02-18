@@ -3,16 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parental Memory Excavation Engine</title>
+    <title>부모님의 삶, 자서전으로 기록하기</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&display=swap">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643444222079021" crossorigin="anonymous"></script>
 </head>
 <body>
     <main class="app-container">
+        <!-- 상단 광고 영역 -->
+        <div class="ads-container top-ads">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1643444222079021"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
         <header>
             <div class="header-content">
                 <span class="header-subtitle">Parental Memory Excavation Engine</span>
-                <h1>기억의 발굴</h1>
+                <h1>Life Story</h1>
             </div>
             <div class="header-actions">
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
@@ -23,68 +36,133 @@
         </header>
 
         <nav class="main-nav">
-            <button class="nav-btn active" data-target="excavate-section">질문 생성</button>
+            <button class="nav-btn active" data-target="excavate-section">자서전 쓰기</button>
             <button class="nav-btn" data-target="inquiry-section">제휴 문의</button>
             <button class="nav-btn" data-target="community-section">커뮤니티</button>
         </nav>
         
-        <!-- Excavation Engine Section -->
+        <!-- Step 1: Input Info -->
         <section id="excavate-section" class="tab-content active">
-            <div class="input-card">
-                <div class="form-row">
-                    <div class="form-group flex-1">
-                        <label>출생 연도</label>
-                        <input type="number" id="birth-year" placeholder="1960" class="input-field">
+            <div id="step-1" class="step-container">
+                <div class="input-card">
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label>부모님 성함</label>
+                            <input type="text" id="parent-name" placeholder="김철수" class="input-field">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label>출생 연도</label>
+                            <input type="number" id="birth-year" placeholder="1960" class="input-field">
+                        </div>
                     </div>
-                    <div class="form-group flex-2">
-                        <label>어린 시절 보낸 지역</label>
-                        <input type="text" id="location" placeholder="강원도 삼척, 서울 중구 등" class="input-field">
+                    <div class="form-group">
+                        <label>어린 시절 지역</label>
+                        <input type="text" id="location" placeholder="강원도 삼척 등" class="input-field">
                     </div>
+                    <div class="form-group">
+                        <label>주요 직업</label>
+                        <input type="text" id="occupation" placeholder="초등학교 교사 등" class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label>성격 (3가지 키워드)</label>
+                        <input type="text" id="traits" placeholder="성실함, 무뚝뚝함, 따뜻함 등" class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label>자녀와의 관계</label>
+                        <input type="text" id="relationship" placeholder="엄격한 아버지 등" class="input-field">
+                    </div>
+                    <button id="generate-questions-btn" class="primary-btn">다음: 발굴 질문 생성</button>
                 </div>
-                <div class="form-group">
-                    <label>주요 직업 (가장 오래 종사한 일)</label>
-                    <input type="text" id="occupation" placeholder="초등학교 교사, 건설 현장 소장 등" class="input-field">
-                </div>
-                <div class="form-group">
-                    <label>성격 키워드 (3가지)</label>
-                    <input type="text" id="traits" placeholder="무뚝뚝함, 성실함, 호기심 등" class="input-field">
-                </div>
-                <div class="form-group">
-                    <label>자녀(본인)와의 관계</label>
-                    <input type="text" id="relationship" placeholder="엄격한 아버지, 친구 같은 어머니 등" class="input-field">
-                </div>
-                <button id="generate-questions-btn" class="primary-btn">5가지 발굴 질문 생성하기</button>
             </div>
 
-            <div id="result-container" class="story-result hidden">
-                <h3 id="result-title">Questions to uncover the unknown youth of your parent</h3>
-                <div id="questions-list" class="story-content"></div>
-                <div class="action-buttons">
-                    <button id="copy-btn" class="secondary-btn">복사하기</button>
-                    <button id="retry-btn" class="secondary-btn">다시 하기</button>
+            <!-- Step 2: Answer Questions -->
+            <div id="step-2" class="step-container hidden">
+                <h3 class="step-title">발굴된 3가지 질문에 답해주세요</h3>
+                <div id="questions-for-answers" class="questions-feedback-list"></div>
+                <button id="generate-biography-btn" class="primary-btn">최종 자서전 생성하기</button>
+            </div>
+
+            <!-- Step 3: Result -->
+            <div id="step-3" class="step-container hidden">
+                <div class="story-result">
+                    <h3>완성된 자서전 초안</h3>
+                    <div id="final-biography" class="story-content"></div>
+                    <div class="action-buttons">
+                        <button id="copy-btn" class="secondary-btn">복사하기</button>
+                        <button id="restart-btn" class="secondary-btn">처음부터 다시</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Other sections remain but updated for context -->
+        <!-- Inquiry Section -->
         <section id="inquiry-section" class="tab-content">
-            <div class="section-header">
-                <h2 class="section-title">비즈니스 제휴</h2>
-                <p class="section-desc">기억 발굴 엔진을 활용한 프로젝트 문의</p>
+            <div class="inquiry-card">
+                <div class="section-header">
+                    <h2 class="section-title">비즈니스 제휴 문의</h2>
+                    <p class="section-desc">출판, 플랫폼 입점 등 다양한 협력을 기다립니다.</p>
+                </div>
+                <form action="https://formspree.io/f/xojnlegw" method="POST" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label>담당자 성함</label>
+                            <input type="text" name="name" required class="input-field" placeholder="홍길동">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label>이메일</label>
+                            <input type="email" name="_replyto" required class="input-field" placeholder="example@mail.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>문의 종류</label>
+                        <select name="type" class="input-field">
+                            <option value="publish">개인 출판 문의</option>
+                            <option value="partnership">기업 제휴 문의</option>
+                            <option value="etc">기타 문의</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>문의 내용</label>
+                        <textarea name="message" required class="input-field textarea-field" placeholder="협력하고 싶은 내용을 상세히 적어주세요."></textarea>
+                    </div>
+                    <button type="submit" class="primary-btn">제휴 문의 전송하기</button>
+                </form>
             </div>
-            <form action="https://formspree.io/f/xojnlegw" method="POST" class="contact-form">
-                <input type="text" name="name" placeholder="성함" required class="input-field">
-                <input type="email" name="_replyto" placeholder="이메일" required class="input-field">
-                <textarea name="message" placeholder="문의 내용" required class="input-field textarea-field"></textarea>
-                <button type="submit" class="primary-btn">문의하기</button>
-            </form>
         </section>
 
+        <!-- Community Section -->
         <section id="community-section" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">이야기 나누기</h2>
+                <p class="section-desc">부모님과 나누었던 소중한 기억을 공유해주세요.</p>
+            </div>
             <div id="disqus_thread"></div>
         </section>
+
+        <!-- 하단 광고 영역 -->
+        <div class="ads-container bottom-ads">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1643444222079021"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
     </main>
 
     <script src="main.js"></script>
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = 'lifestory-main';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://test-4xeppsbpce.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
 </body>
 </html>
