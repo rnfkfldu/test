@@ -259,6 +259,12 @@ h1 {
     transform: translateY(-1px);
 }
 
+.comments-section {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
 @media (max-width: 480px) {
     .app-container {
         padding: 1.5rem;

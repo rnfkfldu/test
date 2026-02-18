@@ -31,6 +31,7 @@ A sophisticated, high-performance web application for generating Lotto 6/45 numb
 - **Dark Mode Persistence**: Remembers user's theme preference across sessions using `localStorage`.
 - **System Theme Integration**: Respects system-level dark/light mode preferences on first load.
 - **Business Inquiry Form**: Integrated Formspree endpoint for professional partnership inquiries.
+- **Community Interaction**: Integrated Disqus commenting system for user feedback and discussion.
 - **Responsive Layout**: Adapts gracefully from mobile to desktop.
 
 ## Development History
@@ -45,3 +46,6 @@ A sophisticated, high-performance web application for generating Lotto 6/45 numb
 3.  **Inquiry Feature**:
     - Added a "Business Inquiry" section integrated with Formspree.
     - Designed seamless form inputs matching the premium theme.
+4.  **Community Feature**:
+    - Integrated Disqus comment thread for user engagement.
+    - Styled for consistent layout spacing.
